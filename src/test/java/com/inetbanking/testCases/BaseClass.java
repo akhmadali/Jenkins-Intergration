@@ -1,6 +1,7 @@
 package com.inetbanking.testCases;
 
 import com.inetbanking.utilities.ReadConfig;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.log4j.Logger;
@@ -8,7 +9,6 @@ import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -35,11 +35,9 @@ public class BaseClass {
         PropertyConfigurator.configure("Log4j.properties");
 
         if(br.equals("chrome")){
-            System.setProperty("webdriver.chrome.driver", readconfig.getChromePath());
-            driver = new ChromeDriver();
+            driver = WebDriverManager.chromedriver().create();
         } else if(br.equals("firefox")){
-            System.setProperty("webdriver.gecko.driver", readconfig.getFirefoxPath());
-            driver = new ChromeDriver();
+            driver = WebDriverManager.firefoxdriver().create();
         }
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get(baseURL);
