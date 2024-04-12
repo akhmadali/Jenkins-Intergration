@@ -1,5 +1,6 @@
 # Default ignored files
-/target/
+/test-output/
+/target
 /shelf/
 /workspace.xml
 

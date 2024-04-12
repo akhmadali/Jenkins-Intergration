@@ -9,6 +9,7 @@ import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -29,14 +30,13 @@ public class BaseClass {
 
     @Parameters("browser")
     @BeforeClass
-    public void setup(String br){
-
+    public void setup(String browser){
         logger = Logger.getLogger("ebanking");
         PropertyConfigurator.configure("Log4j.properties");
 
-        if(br.equals("chrome")){
+        if(browser.equals("chrome")){
             driver = WebDriverManager.chromedriver().create();
-        } else if(br.equals("firefox")){
+        } else if(browser.equals("firefox")){
             driver = WebDriverManager.firefoxdriver().create();
         }
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
