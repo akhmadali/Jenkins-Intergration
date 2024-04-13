@@ -31,6 +31,7 @@ public class BaseClass {
     @Parameters("browser")
     @BeforeClass
     public void setup(String browser){
+
         logger = Logger.getLogger("ebanking");
         PropertyConfigurator.configure("Log4j.properties");
 
@@ -39,6 +40,7 @@ public class BaseClass {
         } else if(browser.equals("firefox")){
             driver = WebDriverManager.firefoxdriver().create();
         }
+        driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get(baseURL);
 
